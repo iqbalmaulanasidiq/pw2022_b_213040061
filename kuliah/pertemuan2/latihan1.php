@@ -92,4 +92,17 @@ echo '<br>';
 echo $x++;
 echo '<br>';
 echo $x;
+
+
+// assignment
+//  =, +=, -=, *=, /=, %=
+$x =1;
+$x += 5;
+echo $x;
+
+
+// logika
+// &&,  ||, !
+$x = 10;
+var_dump($x < 20 && $x % 2 == 0);
 ?>
