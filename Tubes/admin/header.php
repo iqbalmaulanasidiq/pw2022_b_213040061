@@ -28,7 +28,7 @@
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
-    <link rel='stylesheet' href='assets/sweetalert2/sweetalert2.css'>
+    
     
 
 
@@ -36,7 +36,13 @@
 
 <body>
     <!-- Left Panel -->
-
+<?php 
+session_start();
+if(!isset($_SESSION['login'])){
+    header("location: alert.php");
+    exit;
+}
+?>
     <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
 
@@ -44,20 +50,20 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="./">ADMIN PANEL</a>
+                <a class="navbar-brand" href="./">Quisin</a>
                 <a class="navbar-brand hidden" href=""><i class="bi bi-person-workspace"></i></a>
             </div>
 
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="demo.php"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                        <a href="index.php"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                         <a href="data_peserta.php"> <i class="menu-icon fa fa-users"></i></i>Data Peserta </a>
                         <a href="kategori.php"> <i class="menu-icon fa fa-book"></i>Kategori</a>
-                        <a href="add_edit_soal_matakuliah.php"> <i class="menu-icon fa fa-question"></i>Soal Soal</a>
+                        <a href="soal.php"> <i class="menu-icon fa fa-question"></i>Soal Soal</a>
                     </li>
                     <li>
-                        <a href="logout.php"> <i class="menu-icon fa fa-close"></i>logout </a>
+                        <a href="logout.php" onclick="return confirm('Apakah Kamu Yakin Akan Keluar?'); "> <i class="menu-icon fa fa-close"></i>logout </a>
                     </li>
                     
                 </ul>
@@ -91,11 +97,12 @@
             <div class="col-sm-5 ">
                 <div class="user-area dropdown float-right ">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
+                        <img class="user-avatar rounded-circle" src="../assets/img/nophoto.png" alt="User Avatar">
+                        
                     </a>
 
                     <div class="user-menu dropdown-menu ">
-                        <a class="nav-link" href="#"><i class="fa fa-power-off"></i> Logout</a>
+                        <a class="nav-link" href="logout.php" onclick="return confirm('Apakah Kamu Yakin Akan Keluar?'); "><i class="fa fa-power-off"></i> Logout</a>
                     </div>
                 </div>
 
@@ -106,3 +113,5 @@
 
     </header><!-- /header -->
     <!-- Header-->
+
+    

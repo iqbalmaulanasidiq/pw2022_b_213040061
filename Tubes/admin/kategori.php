@@ -39,11 +39,13 @@
 
 </div>
 <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title">Kategori Ujian</strong>
+                        <div class="card ">
+                            <div class="card-header   ">
+                                <strong class="card-title " >Kategori Ujian</strong>
+                               
                             </div>
                             <div class="card-body">
+                            
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
@@ -55,25 +57,28 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+
+
                                     <?php 
-                                        $count = 0 ;
-                                            $res=mysqli_query($conn,"SELECT * FROM kategori");
-                                            while($row=mysqli_fetch_array($res)){
-                                            $count++;
-                                                ?>
-                                                    <tr>
-                                                        <th scope="row"><?= $count; ?></th>
-                                                        <td><?= $row["kategori_ujian"]; ?></td>
-                                                        <td><?= $row["waktu_menit"]; ?></td>
-                                                        <td style="text-align:center">
-                                                            <a href="edit_kategori.php?id=<?= $row['id_kategori'];?>"><i class="bi bi-pencil-square text-warning fa-lg"></i></a> <strong>||</strong> 
-                                                            <a href="delete_kategori.php?id=<?= $row['id_kategori'];?>" ><i class="bi bi-trash text-danger fa-lg"></i></a>
-                                                        </td>
-                                                        
-                                                    </tr>
-                                                <?php
-                                            }
-                                        ?>
+                                        
+                                        $query = "SELECT * FROM kategori";
+                                        $result = mysqli_query($conn, $query);
+                                        $no = 1;
+                                        while($row = mysqli_fetch_assoc($result)){
+                                            ?>
+                                            <tr>
+                                                <th scope="row"><?php echo $no++ ?></th>
+                                                <td><?php echo $row['kategori_ujian'] ?></td>
+                                                <td><?php echo $row['waktu_menit'] ?></td>
+                                                <td style="text-align:center">
+                                                    <a href="edit_kategori.php?id=<?= $row['id_kategori'];?>"><i class="bi bi-pencil-square text-warning fa-lg"></i></a> <strong>||</strong> 
+                                                    <a href="delete_kategori.php?id=<?= $row['id_kategori'];?>" ><i class="bi bi-trash text-danger fa-lg" onclick="return confirm('Yakin Hapus Kategori?'); "></i></a>
+                                                </td>
+                                            </tr>
+                                            <?php } ?>
+
+
+                                    
                                         
                                        
                                     </tbody>

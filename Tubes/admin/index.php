@@ -1,90 +1,90 @@
-<?php require "../connection.php"; ?>
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js" lang="en">
-<!--<![endif]-->
+<?php 
+require "header.php"; 
+require "../connection.php";
+?>
+<div class="breadcrumbs">
+<div class="col-sm-4">
+<div class="page-header float-left">
+    <div class="page-title">
+        <h1>Dashboard</h1>
+    </div>
+</div>
+</div>
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>ADMIN LOGIN</title>
-    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+</div>
 
-    <link rel="apple-touch-icon" href="apple-icon.png">
-    <link rel="shortcut icon" href="favicon.ico">
-
-
-    <link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="vendors/themify-icons/css/themify-icons.css">
-    <link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css">
-    <link rel="stylesheet" href="vendors/selectFX/css/cs-skin-elastic.css">
-
-    <link rel="stylesheet" href="assets/css/style.css">
-
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+<div class="content mt-3 ">
+<div class="animated fadeIn ">
 
 
+<div class="row ">
+    <div class="col-lg-12 ">
+        <div class="card ">
+           
+            
 
-</head>
-
-<body class="bg-dark">
-
-
-    <div class="sufee-login d-flex align-content-center flex-wrap">
-        <div class="container">
-            <div class="login-content">
-                <div class="login-logo" style="color: white ;">
-                    <h1>ADMIN LOGIN</h1>
-                </div>
-                <div class="login-form">
-                    <form name="form1" action="" method="POST">
-                        <div class="form-group">
-                            <label>Username</label>
-                            <input type="text" name="username" class="form-control" placeholder="Isi Dengan Kode Admin">
+           
+            <div class="card-header">
+            <?= "<h3>Selamat Datang, " . $_SESSION['login'] ."!". "</h3>"; ?>
+            </div>
+            <div class="card-body">
+                
+            <div class="col-6 col-lg-6">
+                <?php 
+                $sql = mysqli_query($conn, "SELECT * FROM peserta");
+                $jumlah_peserta = mysqli_num_rows($sql);
+                ?>
+                <div class="card rounded">
+                    <div class="card-body">
+                        <div class="clearfix">
+                            <i class="fa fa-users bg-flat-color-5  p-4  mr-3 float-left text-light rounded"></i>
+                            <div class="text-muted text-uppercase font-weight-bold font-xs small">Jumlah Peserta</div>
+                            <div class="h5 text-secondary mb-0 mt-1"><?= $jumlah_peserta  ?> Orang</div>
+                            
                         </div>
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" name="password" class="form-control" placeholder="Password">
+                        <div class="b-b-1 pt-3"></div>
+                        <hr>
+                        <div class="more-info pt-2" style="margin-bottom:-10px;">
+                            <a class="font-weight-bold font-xs btn-block text-muted small" href="data_peserta.php">View More <i class="fa fa-angle-right float-right font-lg"></i></a>
                         </div>
-                                
-                                <button type="submit" name="submit1" class="btn btn-success btn-flat m-b-30 m-t-30">Sign in</button>
-                               
-                                <div class="alert alert-danger" id="failure" style="margin-top:10px; display:none">
-                                  <strong>Invalid!</strong> Username or Password
-                                </div>
-                    </form>
+                    </div>
                 </div>
             </div>
-        </div>
+            <div class="col-6 col-lg-6">
+                <?php 
+                $sql = mysqli_query($conn, "SELECT * FROM kategori");
+                $jumlah_kategori = mysqli_num_rows($sql);
+                ?>
+                <div class="card rounded">
+                    <div class="card-body">
+                        <div class="clearfix">
+                            <i class="fa fa-book bg-flat-color-4  p-4  mr-3 float-left text-light rounded"></i>
+                            <div class="text-muted text-uppercase font-weight-bold font-xs small">Jumlah Kategori</div>
+                            <div class="h5 text-secondary mb-0 mt-1"><?= $jumlah_kategori  ?> Pelajaran</div>
+                            
+                        </div>
+                        <div class="b-b-1 pt-3"></div>
+                        <hr>
+                        <div class="more-info pt-2" style="margin-bottom:-10px;">
+                            <a class="font-weight-bold font-xs btn-block text-muted small" href="kategori.php">View More <i class="fa fa-angle-right float-right font-lg"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+           <div class="container">
+               <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquam enim dolor aliquid maxime est possimus dicta, corrupti tempore reprehenderit laudantium ipsum, perferendis quisquam iure iusto. Voluptatem iure, sint facere aspernatur itaque earum delectus dicta? Animi rerum eius molestiae non, autem aspernatur quo neque, provident vitae ipsa ducimus tenetur. Nobis, dolores!</p>
+           </div>
+ 
+
+            </div>
+        </div> 
+
     </div>
+    <!--/.col-->
 
 
-    <script src="vendors/jquery/dist/jquery.min.js"></script>
-    <script src="vendors/popper.js/dist/umd/popper.min.js"></script>
-    <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="assets/js/main.js"></script>
-
-
-</body>
-
-</html>
-
-<?php 
-    if(isset($_POST["submit1"])){
-        $count=0;
-        $res = mysqli_query($conn, "SELECT * FROM adm  WHERE kd_admin='$_POST[username]' && password='$_POST[password]' ");
-
-        $count=mysqli_num_rows($res);
-
-        if($count==0){
-        echo "<script>document.getElementById('failure').style.display='block';</script>";
-        }else{
-            echo "<script>window.location.href='demo.php';</script>";
-        }
-    }
-    ?>
+</div>
+</div><!-- .animated -->
+</div><!-- .content -->
+ <?php include "footer.php" ?>                              

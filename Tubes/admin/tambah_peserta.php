@@ -64,31 +64,64 @@
 
 <?php 
     if(isset($_POST["submit1"])){
-        $ekstensi_diperbolehkan	= array('png','jpg');
-        $nama = $_FILES['gambar']['name'];
-        $x = explode('.', $nama);
-        $ekstensi = strtolower(end($x));
-        $ukuran	= $_FILES['gambar']['size'];
-        $file_tmp = $_FILES['gambar']['tmp_name'];
-               	
-        if(in_array($ekstensi, $ekstensi_diperbolehkan) === true){
-            if($ukuran < 1044070){			
-                move_uploaded_file($file_tmp, '../assets/img/'.$nama);
-                $query= mysqli_query($conn, "INSERT INTO peserta VALUES(NULL, '$_POST[nama_peserta]', '$_POST[username]','$_POST[email]','$_POST[pass]','$nama')") or die(mysqli_error($conn));
-                if($query){
-                   echo "<script>alert('Data Berhasil Ditambahkan'); window.location='data_peserta.php'</script>";
-                }else{
-                    echo "<script>alert('Data Gagal Ditambahkan'); window.location='tambah_peserta.php'</script>";
-                }
-            }else{
-                echo "<script>alert('Ukuran File Terlalu Besar'); window.location='tambah_peserta.php'</script>";
+
+        $nama_peserta = htmlspecialchars($_POST["nama_peserta"]);
+        $username = htmlspecialchars($_POST["username"]);
+        $email = htmlspecialchars($_POST["email"]);
+        $pass = htmlspecialchars($_POST["pass"]);
+        
+        if($_FILES["gambar"]["error"] === 4) {
+            // pilih gambar default
+            $gambar = "nophoto.png";
+        } else {
+            // jalankan fungsi upload
+            $gambar = upload();
+            // cek jika upload gagal
+            if (!$gambar) {
+                return false;
             }
-        }else{
-            echo "<script>alert('Ekstensi File Tidak Diperbolehkan'); window.location='data_peserta.php'</script>";
+        }
+        $sql = mysqli_query($conn, "INSERT INTO peserta (id, nama_peserta, username, email, pass, gambar) VALUES (NULL,'$nama_peserta', '$username', '$email', '$pass', '$gambar')")or die(mysqli_error($conn));
+        if($sql){
+            echo "<script>
+            alert('Data Peserta Berhasil Ditambahkan');
+            location.href='data_peserta.php';
+            </script>";
+           }
+        
+        
+    }
+
+function upload(){
+    $filename = $_FILES['gambar']['name'];
+    $filetmpname = $_FILES['gambar']['tmp_name'];
+    $filesize = $_FILES['gambar']['size'];
+    $filetype = pathinfo($filename, PATHINFO_EXTENSION);
+    $allowedtype = ['jpg', 'jpeg', 'png'];
+
+
+    if(!in_array($filetype, $allowedtype)){
+        echo "<script>
+        alert('File yang diupload harus berformat .jpg, .jpeg, .png');
+        </script>";
+        return false;
+    }else{
+        if($filesize > 2000000){
+            echo "<script>
+            alert('Ukuran file terlalu besar');
+            </script>";
+            return false;
         }
     }
-        
-    
+
+   $newname = uniqid().$filename;
+   move_uploaded_file($filetmpname, '../assets/img/'.$newname);
+    return $newname;
+   
+
+}
+
+
 ?>
 
  <?php require "footer.php" ?>                              

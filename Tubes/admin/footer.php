@@ -8,6 +8,6 @@
 <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="assets/js/main.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
-<script type="text/javascript" charset="utf8" src="assets/sweetalert2/sweetalert2.js"></script>
+
 </body>
 </html>

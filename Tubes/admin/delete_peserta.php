@@ -1,12 +1,20 @@
 <?php 
     require "../connection.php";
-    $id=$_GET['id'];
+   
+
     $img = "SELECT gambar From peserta WHERE id = '$_GET[id]'";
     $res = mysqli_query($conn, $img);
     $row = mysqli_fetch_array($res);
-    if(file_exists("../assets/img/".$row['gambar'])){
+    if($row['gambar'] != "nophoto.png"){
         unlink("../assets/img/".$row['gambar']);
-        mysqli_query($conn, "DELETE FROM peserta WHERE id = '$_GET[id]'");
+    }
+    $sql = "DELETE FROM peserta WHERE id = '$_GET[id]'";
+    $res = mysqli_query($conn, $sql);
+    if($res){
+        echo "<script>
+        alert('Data Peserta Berhasil Dihapus');
+        location.href='data_peserta.php';
+        </script>";
     }
     
 ?>
