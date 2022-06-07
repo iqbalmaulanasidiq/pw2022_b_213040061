@@ -31,7 +31,7 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Kategori</th>
-                        <th scope="col">Waktu Ujian</th>
+                       
                         <th scope="col">ACTION</th>
                         
                     </tr>
@@ -41,7 +41,7 @@
                 <?php 
             if(isset($_POST['cari'])){
                 $cari = $_POST['cari'];
-                $query = "SELECT * FROM kategori WHERE Kategori_ujian LIKE '%$cari%'OR waktu_menit LIKE '%$cari%' ";
+                $query = "SELECT * FROM kategori WHERE Kategori_ujian LIKE '%$cari%'";
             }else{
                 $query = "SELECT * FROM kategori";
             }
@@ -52,10 +52,8 @@
                 <tr>
                     <th scope="row"><?php echo $no++ ?></th>
                     <td><?= $row["kategori_ujian"]; ?></td>
-                    <td><?= $row["waktu_menit"]; ?></td>
                     <td style="text-align:center">
-                        <a href="tambah_edit_soal.php?id=<?= $row['id_kategori'];?>"><i class="bi bi-plus-circle-fill text-success fa-lg"></i></a> <strong>||</strong> 
-                        <a href="tampil_soal.php?id=<?= $row['id_kategori'];?>" ><i class="bi bi-eye-fill text-primary fa-lg"></i></a>
+                        <a href="tambah_edit_soal.php?id=<?= $row['id_kategori'];?>"><i class="bi bi-plus-circle-fill text-dark rounded fa-lg btn btn-primary"></i></a>
                     </td>
                 </tr>
                 <?php } ?>

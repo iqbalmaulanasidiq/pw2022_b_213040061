@@ -23,73 +23,150 @@ while($row=mysqli_fetch_array($res)){
 <div class="animated fadeIn">
 
 
+
+<!-- mulai -->
+
 <div class="row">
-    <div class="col-lg-12 ">
+    <div class="col-lg-12">
         <div class="card">
             
             <div class="card-body">
-                
-            <div class="col-lg-12 ">
-                <form action="" name="form1" method="POST">
+            <div class="col-lg-12">
                         <div class="card">
-                            <?php 
+                        <form action="" name="form1" method="POST">
+                        <div class="card">
                             
-                            $sql = mysqli_query($conn,"SELECT * FROM soalsoal ");
-                            $jumlah_soal = mysqli_num_rows($sql);
-                            ?>
                         <div class="card-header"><strong>Tambah Pertanyaan Untuk Kategori <?= "<font color='red'>" . $kategori. "</font>"  ?></strong><br>
-                        <p class="pt-2">
-                        Jumlah Soal Pada Kategori <?= "<font color='red'>" . $kategori. "</font>"  ?> Adalah <?= "<font color='red'>" . $jumlah_soal. "</font>"  ?> Soal
-                        </p>
+                        
                             
                             <div class="card-body card-block">
                             <div class="form-group">
-                                <label for="company" class=" form-control-label">Tambah Pertanyaan</label><input type="text" name="pertanyaan" placeholder="Add Questions" class="form-control">
+                               
+                            
+
+                            <div class="form-floating">
+                            <label for="floatingTextarea2"><strong>Tambahkan Pertanyaan</strong></label>
+                            <textarea class="form-control" placeholder="Tambahkan Pertanyaan" name="pertanyaan" id="floatingTextarea2" style="min-height: 150px"></textarea>
+                            
+                            </div>
                             </div>
                             
-                            <div class="form-group">
-                                <label for="opt1" class=" form-control-label">Pilihan Ganda 1</label><input type="text" name="opt1" placeholder="Tambah Pilihan Ganda 1" class="form-control">
-                            </div>
                             
-                            <div class="form-group">
-                                <label for="opt2" class=" form-control-label">Pilihan Ganda 2</label><input type="text" name="opt2" placeholder="Tambah Pilihan Ganda 2" class="form-control">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="opt3" class=" form-control-label">Pilihan Ganda 3</label><input type="text" name="opt3" placeholder="Tambah Pilihan Ganda 3" class="form-control">
-                            </div>
-                            
-                            <div class="form-group">
-                                    <label for="opt4" class=" form-control-label">Pilihan Ganda 4</label><input type="text" name="opt4" placeholder="Tambah Pilihan Ganda 4" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                    <label for="jawaban" class=" form-control-label">Jawaban</label><input type="text" name="jawaban" placeholder="Tambah Jawaban" class="form-control">
-                            </div>
                             <div class="form-group">
                                 <input type="submit" name="submit1" value="Tambahkan Soal" style="border-radius:5px ;" class="btn btn-success">
                             </div>
-                            <a href="tampil_soal.php?id=<?= $id_kat ?>" class="text-primary">Tampilkan Semua Soal Pada Kategori <?=  $kategori ;  ?> </a>
+                            
                             </div>            
                 
-
-            </div>
-
-            </div>
-
+                 </form>         
                 
 
-            
+            </div>
             
         </div> 
-               
-
-            </div>
-            </form>
+        
     </div>
     <!--/.col-->
-</div>
+    
 
 </div>
+            <div class="col-lg-12">
+                        <div class="card ">
+                        <div class="card-header d-flex justify-content-between">
+                    <strong class="card-title ">Pertanyaan Pada Kategori <?= $kategori; ?></strong>
+                    <!-- <form action="tambah_edit_soal.php" method="POST" >
+                    <input type="text" name="cari" autocomplete="off" placeholder="Silahkan Cari" class="form-control" >
+                    
+                    </form> -->
+                    </div>  
+                            <div class="card-body">
+                            
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        
+                                        <th scope="col" style="width: 10px;">No</th>
+                                        
+                                        <th scope="col">Pertanyaan</th>
+                                        
+                                        <th scope="col" style="width: 90px;">Aksi</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php 
+                                   
+                                        $res=mysqli_query($conn,"SELECT * FROM soalsoal WHERE id_kategori='$id_kat'");
+                                        $no=1;
+                                        while($row=mysqli_fetch_array($res)){
+                                       
+                                            ?>
+                                                <tr>
+                                                
+                                                    <td><?= $no++; ?></td>
+                                                    <td><?= $row["pertanyaan"]; ?></td>
+                                                    
+                                                    
+                                                    <td style="text-align:center">
+                                                    <a href="edit_soal.php?id=<?= $id_kat ?>&id_soal=<?= $row['id_soal']?>"><i class="bi bi-pencil-square text-warning fa-lg"></i></a> <strong>||</strong> 
+                                                    <a href="delete_soal.php?id=<?= $id_kat ?>&id_soal=<?= $row['id_soal'];?>" ><i class="bi bi-trash text-danger fa-lg" onclick="return confirm('Yakin Hapus Pertanyaan?'); "></i></a>
+                                                    </td>
+                                                    
+                                                </tr>
+                                            <?php
+                                        }
+                                    ?>
+
+
+                            <!-- <?php 
+                            if(isset($_POST['cari'])){
+                                $cari = $_POST['cari'];
+                                $query = "SELECT * FROM soalsoal  WHERE id_kategori='$id_kat' AND pertanyaan LIKE '%$cari%'";
+                            }else{
+                                $query = "SELECT * FROM soalsoal WHERE id_kategori='$id_kat'";
+                            }
+                            $result = mysqli_query($conn, $query);
+                            $no = 1;
+                            while($row = mysqli_fetch_assoc($result)){
+                                ?>
+                                <tr>
+                                                
+                                    <td><?= $row["no_pertanyaan"]; ?></td>
+                                    <td><?= $row["pertanyaan"]; ?></td>
+                                    
+                                    
+                                    <td style="text-align:center">
+                                    <a href="edit_soal.php?id=<?= $id_kat ?>&id_soal=<?= $row['id_soal']?>"><i class="bi bi-pencil-square text-warning fa-lg"></i></a> <strong>||</strong> 
+                                    <a href="delete_soal.php?id=<?= $id_kat ?>&id_soal=<?= $row['id_soal'];?>" ><i class="bi bi-trash text-danger fa-lg" onclick="return confirm('Yakin Hapus Pertanyaan?'); "></i></a>
+                                    </td>
+                                    
+                                </tr>
+                                <?php } ?> -->
+                                    
+                                    
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+<!-- selesai -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div><!-- .animated -->
 </div><!-- .content -->
 
@@ -97,28 +174,18 @@ while($row=mysqli_fetch_array($res)){
     
    if(isset($_POST['submit1'])){
 
-       $no_pertanyaan = $_POST['no_pertanyaan'];
-       $loop=0;
-         $res= mysqli_query($conn,"SELECT * FROM soalsoal WHERE id_kategori='$id_kat'");
-            while($row=mysqli_fetch_array($res)){
-                $loop++;
-                mysqli_query($conn,"UPDATE soalsoal SET no_pertanyaan='$loop' WHERE id_soal='$row[id_soal]'");
-            }
-            $no_pertanyaan = $loop+1;
+       
+       
+        
 
 
         $pertanyaan = $_POST['pertanyaan'];
-        $opt1 = $_POST['opt1'];
-        $opt2 = $_POST['opt2'];
-        $opt3 = $_POST['opt3'];
-        $opt4 = $_POST['opt4'];
-        $jawaban = $_POST['jawaban'];
         $id_kat = $_GET['id'];
-        $res = "INSERT INTO soalsoal (no_pertanyaan, id_kategori, pertanyaan, opt1, opt2, opt3, opt4, jawaban) VALUES ('$no_pertanyaan','$id_kat', '$pertanyaan', '$opt1', '$opt2', '$opt3', '$opt4', '$jawaban')";
+        $res = "INSERT INTO soalsoal ( id_kategori, pertanyaan) VALUES ('$id_kat', '$pertanyaan')";
         $result = mysqli_query($conn, $res);
         if($result){
             echo "<script>alert('Soal Berhasil Ditambahkan');</script>";
-            echo "<script>location='tampil_soal.php?id=$id_kat';</script>";
+            echo "<script>location='tambah_edit_soal.php?id=$id_kat';</script>";
         }else{
             echo "<script>alert('Soal Gagal Ditambahkan');</script>";
             echo "<script>location='tambah_edit_soal.php?id=$id_kat';</script>";

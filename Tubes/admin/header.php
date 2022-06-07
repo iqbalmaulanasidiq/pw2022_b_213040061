@@ -1,3 +1,4 @@
+
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -42,6 +43,7 @@ if(!isset($_SESSION['login'])){
     header("location: alert.php");
     exit;
 }
+
 ?>
     <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
@@ -93,15 +95,24 @@ if(!isset($_SESSION['login'])){
                     
                 </div>
             </div>
-
+            <?php 
+            require "../connection.php";
+            $id_admin = $_SESSION['login']['id'];
+            $sql = "SELECT * FROM adm WHERE id = '$id_admin'";
+            $query = mysqli_query($conn, $sql);
+            while($data = mysqli_fetch_array($query)){
+                $gambar_profile = $data['gambar'];
+            }
+            ?>
             <div class="col-sm-5 ">
                 <div class="user-area dropdown float-right ">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="user-avatar rounded-circle" src="../assets/img/nophoto.png" alt="User Avatar">
+                        <img class="user-avatar rounded-circle" src="../assets/img/<?= $gambar_profile; ?>" alt="User Avatar">
                         
                     </a>
 
                     <div class="user-menu dropdown-menu ">
+                        <a class="nav-link" href="profil_admin.php" ><i class="fa fa-user"></i> Profile</a>
                         <a class="nav-link" href="logout.php" onclick="return confirm('Apakah Kamu Yakin Akan Keluar?'); "><i class="fa fa-power-off"></i> Logout</a>
                     </div>
                 </div>

@@ -25,7 +25,7 @@ require "../connection.php";
 
            
             <div class="card-header">
-            <?= "<h3>Selamat Datang, " . $_SESSION['login'] ."!". "</h3>"; ?>
+            <?= "<h3>Selamat Datang, " . $_SESSION['login']['nama'] ."!". "</h3>"; ?>
             </div>
             <div class="card-body">
                 
