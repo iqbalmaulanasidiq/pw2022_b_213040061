@@ -83,6 +83,7 @@ $jumlah_soal = mysqli_num_rows($query);
               
               <a href="" class="text-warning h5" onclick="return confirm('Kerjakan Soal Essay Berikut dengan sertakan nama lengkap, kategori soal, nomor soal, dan halaman soal. Kemudian Upload Dengan Format .PDF atau .docx'); ""><i class="bi bi-info-circle-fill"></i></a>
               <h3 class="text-center">Soal Essay</h3>
+              <a href="download_soal.php">DOWNLOAD SOAL</a>
             </div>
             <div class="card-body">
             
