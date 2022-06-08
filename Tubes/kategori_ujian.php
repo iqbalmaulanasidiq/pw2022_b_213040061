@@ -1,5 +1,5 @@
 <?php 
-session_start();
+
 require "header.php";
 require "connection.php";
 ?>
@@ -59,33 +59,54 @@ require "connection.php";
 </header>
 
 
-<div class="main-content">
+<div >
 
-  <section>
+  <section >
      <div class="container">
          
-           <div class="row justify-content-around pt-5 ">
-                <div class="col-lg-10 ">
-                    
-                <div class="card bg-dark px-5 pt-3 pb-3 text-white">
-                <h2 class="text-center pb-3 pt-3">Pilih Kategori Kuis</h2>
-                <hr>
-                <table class="table text-white mt-4" >
-                    <thead>
-                        <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Kategori</th>
-                        
-                        <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php 
-                                        
-                        $query = "SELECT * FROM kategori";
-                        $result = mysqli_query($conn, $query);
-                        $no = 1;
-                        while($row = mysqli_fetch_assoc($result)){
+           
+        <div class="row justify-content-around pt-5 ">
+          <div class="card bg-dark" style="min-height: 600px;">
+            <div class="col-lg-12 ">
+                    <div class="card-header bg-dark text-white d-flex justify-content-between px-5 py-3">
+                    <h2 class=" card-title ">Pilih Kategori Kuis</h2>
+                    <form action="kategori_ujian.php" method="GET"  >
+                        <input type="text" id="cari"  name="cari" autocomplete="off" placeholder="Silahkan Cari" class="form-control" >        
+                    </form>
+                    </div>
+                
+                <div id="tampilkan">
+                  <div class="card bg-dark p-3" style="min-height: 400px;">
+                  <table class="table text-white mt-4" >
+                      <thead>
+                          <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Kategori</th>
+                          
+                          <th scope="col">Action</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                     <?php 
+                      //  pagination
+                      // awal konfigurasi
+                        $jumlahDataPerHal = 5;
+                        $res = mysqli_query($conn, "SELECT * FROM Kategori ");
+                        $jumlahsoal= mysqli_num_rows($res);
+                        $jumlahHal = ceil($jumlahsoal / $jumlahDataPerHal);
+                        $halamanAktif = (isset($_GET['halaman'])) ? $_GET['halaman'] : 1;
+                        $awalData = ($jumlahDataPerHal * $halamanAktif) - $jumlahDataPerHal;
+                      // akhir konfigurasi
+                     
+                     ?>
+                      <?php 
+                         
+                            $sql = "SELECT * FROM kategori LIMIT $awalData, $jumlahDataPerHal";
+                         
+
+                          $result = mysqli_query($conn, $sql);
+                          $no = 1;
+                          while($row = mysqli_fetch_assoc($result)){
                             ?>
                             <tr>
                                 <th scope="row"><?php echo $no++ ?></th>
@@ -96,22 +117,81 @@ require "connection.php";
                                     
                                 </td>
                             </tr>
-                        <?php } 
-                    ?>
-                    </tbody>
-                </table>
+                            <?php } 
+                        ?> 
+                      
+                      </tbody>
+
+                      
+                  </table>
+                  </div>
+                  <!-- navigasi -->
+                <nav aria-label="page navigation example fixed-bottom">
+                <ul class="pagination justify-content-end">
+                <?php if($halamanAktif == 1): ?>
+                  <li class="page-item disabled ">
+                    <a class="page-link" href="kategori_ujian.php?halaman=<?= $halamanAktif-1; ?>" >Back</a> 
+                  </li>
+                  <?php endif; ?>
+
+                  <?php if($halamanAktif > 1): ?>
+                  <li class="page-item  ">
+                    <a class="page-link" href="kategori_ujian.php?halaman=<?= $halamanAktif-1; ?>" >Back</a> 
+                  </li>
+                  <?php endif; ?>
+
+                  <?php for($i=1; $i<= $jumlahHal; $i++ ): ?>
+                    <?php if($i== $halamanAktif): ?>
+                      <li class="page-item active">
+                      <a class="page-link " href="kategori_ujian.php?halaman=<?= $i; ?>"  ><?= $i; ?></a>
+                      </li>
+                      <?php else: ?>
+                        <li class="page-item">
+                          <a class="page-link" href="kategori_ujian.php?halaman=<?= $i; ?>"><?= $i; ?></a>
+                      </li>
+                    <?php endif; ?>
+                  <?php endfor; ?>
+
+                
+                  <?php if($halamanAktif < $jumlahHal): ?>
+                    <li class="page-item  ">
+                    <a class="page-link" href="kategori_ujian.php?halaman=<?= $halamanAktif+1; ?>" >Next</a> 
+                  </li>
+                  <?php endif; ?>
+
+                  <?php if($halamanAktif == $jumlahHal): ?>
+                    <li class="page-item disabled ">
+                    <a class="page-link" href="kategori_ujian.php?halaman=<?= $halamanAktif+1; ?>" >Next</a> 
+                  </li>
+                  <?php endif; ?>
+
+                  <?php if($halamanAktif > $jumlahHal): ?>
+                    <li class="page-item disabled ">
+                    <a class="page-link" href="kategori_ujian.php?halaman=<?= $halamanAktif+1; ?>" >Next</a> 
+                  </li>
+                  <?php endif; ?>
+
+
+                </ul>
+            </nav>
+            <!-- akhir navigasi -->
+                </div>
+                
                 
                 </div>
-                </div>
-                         
-           </div>
+                
+             </div>  
+                    
+          </div>
            
                 
 
            
-        </div>
+    </div>
        
   </section>
+
+  
 
   <!-- <section>
     <div class="container">
@@ -127,7 +207,33 @@ require "connection.php";
 
 
   </div>
-  
+  <script type="text/javascript">
+    // ambil element
+
+var cari = document.getElementById('cari');
+
+var tampilkan = document.getElementById('tampilkan');
+
+// tambahkan event ketika ditulis
+
+cari.addEventListener('keyup', function () {
+  // buat objeck ajax
+  var xhr = new XMLHttpRequest();
+
+  // mengecek kesiapan ajax
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      tampilkan.innerHTML = xhr.responseText;
+    }
+  };
+  // eksekusi ajaxnya
+ 
+  xhr.open('GET', 'assets/ajax/kategori.php?cari='+cari.value, true);
+    
+    xhr.send();
+});
+</script>
+
 
 <?php require "footer.php" ?>
 

@@ -1,4 +1,4 @@
-<footer>
+<footer class="class="fixed-bottom"">
     <p class="text-center pt-3">Copyright &copy; 2022 Kuisin Iqbal Maulana Sidiq-213040061</p>
   </footer>
  <!-- Optional JavaScript -->

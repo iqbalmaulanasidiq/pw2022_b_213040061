@@ -185,3 +185,6 @@ section:nth-of-type(even) {
   background-color: #fe4066;
   color: white;
 }
+.main-content {
+  min-height: 800px;
+}

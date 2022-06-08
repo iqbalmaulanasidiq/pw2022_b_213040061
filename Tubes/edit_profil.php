@@ -1,7 +1,7 @@
 <?php 
 require 'connection.php';
 require 'header.php';
-session_start();
+
 $id = $_SESSION['login']['id'];
 
 $res=mysqli_query($conn, "SELECT * FROM peserta WHERE id=$id");

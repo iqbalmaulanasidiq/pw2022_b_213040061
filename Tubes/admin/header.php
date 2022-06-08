@@ -40,7 +40,7 @@
 <?php 
 session_start();
 if(!isset($_SESSION['login'])){
-    header("location: alert.php");
+    header("location: login.php");
     exit;
 }
 
@@ -61,7 +61,7 @@ if(!isset($_SESSION['login'])){
                     <li>
                         <a href="index.php"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                         <a href="data_peserta.php"> <i class="menu-icon fa fa-users"></i></i>Data Peserta </a>
-                        <a href="kategori.php"> <i class="menu-icon fa fa-book"></i>Kategori</a>
+                        <!-- <a href="kategori.php"> <i class="menu-icon fa fa-book"></i>Kategori</a> -->
                         <a href="soal.php"> <i class="menu-icon fa fa-question"></i>Soal Soal</a>
                     </li>
                     <li>

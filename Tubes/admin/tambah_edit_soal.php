@@ -74,12 +74,11 @@ while($row=mysqli_fetch_array($res)){
                         <div class="card ">
                         <div class="card-header d-flex justify-content-between">
                     <strong class="card-title ">Pertanyaan Pada Kategori <?= $kategori; ?></strong>
-                    <!-- <form action="tambah_edit_soal.php" method="POST" >
-                    <input type="text" name="cari" autocomplete="off" placeholder="Silahkan Cari" class="form-control" >
-                    
-                    </form> -->
+                   
                     </div>  
                             <div class="card-body">
+                            <div id="tampilkan">
+
                             
                             <table class="table table-bordered">
                                 <thead>
@@ -146,6 +145,7 @@ while($row=mysqli_fetch_array($res)){
                                     
                                 </tbody>
                             </table>
+                            </div>
                             </div>
                         </div>
                     </div>

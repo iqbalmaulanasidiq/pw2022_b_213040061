@@ -1,5 +1,4 @@
 <?php 
-session_start();
 require "header.php";
 require "connection.php";
 ?>
@@ -43,10 +42,10 @@ require "connection.php";
         <img src="assets/img/<?= $gambar; ?>" alt="" style="width: 30px;" class="rounded-circle img-thumbnail ">
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="edit_profil.php">Ubah Profil</a>
+          <a class="dropdown-item"  href="edit_profil.php" onclick="return confirm('Yakin Meninggalkan Halaman ini?'); ">Ubah Profil</a>
           
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="logout.php">Logout</a>
+          <a class="dropdown-item" href="logout.php" onclick="return confirm('Yakin Meninggalkan Halaman ini?'); ">Logout</a>
         </div>
       </li>
     </ul>
@@ -68,22 +67,32 @@ $query = mysqli_query($conn, $sql);
 while($data = mysqli_fetch_array($query)){
     $nama_kategori = $data['kategori_ujian'];
 }
+
+$res = "SELECT * FROM soalsoal WHERE id_kategori = '$id_kat'";
+$query = mysqli_query($conn, $res);
+$jumlah_soal = mysqli_num_rows($query);
 ?>
   <section>
     <div class="container">
       <div class="row justify-content-around pt-5 ">
         <div class="col-lg-8 ">
-          <div class="card bg-dark px-5 pt-3 pb-3 text-white" style="min-height: 600px">
+          <div class="card bg-dark px-5 pt-3 pb-3 text-white" style="min-height: 500px">
             <div class="card-header">
             <h3 class="text-center">Selamat Datang <?= $nama_peserta; ?></h3>
-              <p class="text-center">Selamat mengerjakan Soal Pada Kategori <?= $nama_kategori; ?> </p>
+              <p class="text-center">Selamat mengerjakan Soal Pada Kategori <?= $nama_kategori; ?> dengan jumlah soal <?= $jumlah_soal; ?> </p>
+              
+              <a href="" class="text-warning h5" onclick="return confirm('Kerjakan Soal Essay Berikut dengan sertakan nama lengkap, kategori soal, nomor soal, dan halaman soal. Kemudian Upload Dengan Format .PDF atau .docx'); ""><i class="bi bi-info-circle-fill"></i></a>
+              <h3 class="text-center">Soal Essay</h3>
             </div>
             <div class="card-body">
             
             
             
               <div class="col-lg-12">
-              <div class="card bg-white" style="min-height: 400px;">
+              
+              <div class="card bg-white" style="min-height: 300px;">
+              
+             
               <div class="container">
                 <form action="" method="post">
                   <table class="table table-borderless">
@@ -106,6 +115,7 @@ while($data = mysqli_fetch_array($query)){
                     $sql = "SELECT * FROM soalsoal WHERE id_kategori = '$_GET[id]' LIMIT $awalData, $jumlahDataPerHal";
                     $query = mysqli_query($conn, $sql);
                     $no = 1;
+                    
                     while($row = mysqli_fetch_assoc($query)){
                       ?>
                       <tr>
@@ -117,6 +127,7 @@ while($data = mysqli_fetch_array($query)){
                    ?>
                   </table>
                 </form>
+                
               </div>
               </div>
               </div>
@@ -124,29 +135,24 @@ while($data = mysqli_fetch_array($query)){
 
             </div>
 
-            <!-- navigasi awal -->
-            <!-- <?php if($halamanAktif > 1): ?>
-            <a href="mulai_ujian.php?id=<?= $id_kat; ?>&halaman=<?= $halamanAktif-1; ?>">&lt;</a>
-            <?php endif; ?>
-
-              <?php for($i=1; $i<= $jumlahHal; $i++ ): ?>
-                <?php if($i== $halamanAktif): ?>
-                  <a href="mulai_ujian.php?id=<?= $id_kat; ?>&halaman=<?= $i; ?>" style="font-weight:bold;color:red;" ><?= $i; ?></a>
-                <?php else: ?>
-                  <a href="mulai_ujian.php?id=<?= $id_kat; ?>&halaman=<?= $i; ?>"><?= $i; ?></a>
-                <?php endif; ?>
-              <?php endfor; ?>
-
-              <?php if($halamanAktif < $jumlahHal): ?>
-            <a href="mulai_ujian.php?id=<?= $id_kat; ?>&halaman=<?= $halamanAktif+1; ?>">&gt;</a>
-            <?php endif; ?> -->
+           
+            <div id="ambil">
+              <form action="" method="POST" enctype="multipart/form-data">
+                  <div class="mb-3 col-12 justify-content-around">
+                    <label for="formFile"  class="form-label">Upload Jawaban Anda</label>
+                    <input  class="form-control" type="file" id="jawab" name="jawab">
+                    <input class=" btn btn-primary mt-2" name="kumpulkan" id="kumpulkan" type="submit" value="Upload">
+                  </div>
+                  </form>
+            </div>
+            
 
 
             <nav aria-label="page navigation example">
                 <ul class="pagination justify-content-center">
                 <?php if($halamanAktif == 1): ?>
                   <li class="page-item disabled ">
-                    <a class="page-link" href="mulai_ujian.php?id=<?= $id_kat; ?>&halaman=<?= $halamanAktif-1; ?>" >Back</a> 
+                    <a class="page-link" href="mulai_ujian.php?id=<?= $id_kat; ?>&halaman=<?= $i; ?>" >Back</a> 
                   </li>
                   <?php endif; ?>
 
@@ -155,6 +161,15 @@ while($data = mysqli_fetch_array($query)){
                     <a class="page-link" href="mulai_ujian.php?id=<?= $id_kat; ?>&halaman=<?= $halamanAktif-1; ?>" >Back</a> 
                   </li>
                   <?php endif; ?>
+
+                  <?php for($i=1; $i<= $jumlahHal; $i++ ): ?>
+                    <?php if($i== $halamanAktif): ?>
+                      <li class="page-item">
+                      <a class="page-link" href="mulai_ujian.php?id=<?= $id_kat; ?>&halaman=<?= $i; ?>" style="font-weight:bold;color:red;" >Halaman&nbsp;<?= $i; ?></a>
+                      </li>
+                    <?php endif; ?>
+                  <?php endfor; ?>
+
                 
                   <?php if($halamanAktif < $jumlahHal): ?>
                     <li class="page-item  ">
@@ -164,7 +179,7 @@ while($data = mysqli_fetch_array($query)){
 
                   <?php if($halamanAktif == $jumlahHal): ?>
                     <li class="page-item disabled ">
-                    <a class="page-link" href="mulai_ujian.php?id=<?= $id_kat; ?>&halaman=<?= $halamanAktif+1; ?>" >Next</a> 
+                    <a class="page-link" href="mulai_ujian.php?id=<?= $id_kat; ?>&halaman=<?= $i; ?>" >Next</a> 
                   </li>
                   <?php endif; ?>
 
@@ -194,3 +209,46 @@ while($data = mysqli_fetch_array($query)){
 
 <?php require "footer.php" ?>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php 
+if(isset($_POST['kumpulkan'])){
+$filename= $_FILES['jawab']['name'];
+$filetmpname = $_FILES['jawab']['tmp_name'];
+$filesize = $_FILES['jawab']['size'];
+$filetype = pathinfo($filename, PATHINFO_EXTENSION);
+$allowed = ['pdf', 'doc', 'docx'];
+
+
+if(in_array(strtolower($filetype), $allowed)){
+  if($filesize < 5000000){
+    move_uploaded_file($filetmpname, "assets/jawaban_peserta/" .$filename);
+    $query = mysqli_query($conn, "INSERT INTO jawaban (id_jawaban, jawaban_soal, id, id_kategori) VALUES ('NULL', '$filename', '$id_peserta', '$id_kat')");
+    if($query){
+      echo "<script>alert('Jawaban berhasil diupload');</script>";
+      echo "<script>location='kategori_ujian.php';</script>";
+    }else{
+      echo "<script>alert('Jawaban gagal diupload');</script>";
+      echo "<script>location='kategori_ujian.php';</script>";
+    }
+  }else{
+    echo "<script>alert('Ukuran file terlalu besar');</script>";
+  }
+  }else{
+    echo "<script>alert('File yang diupload bukan file pdf ataupun docx');</script>";
+}
+
+}
+?>
