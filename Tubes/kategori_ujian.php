@@ -2,6 +2,11 @@
 
 require "header.php";
 require "connection.php";
+session_start();
+if(!isset($_SESSION['login'])){
+    header("location: login.php");
+    exit;
+}
 ?>
 <header class="header">
   <div class="header-inner">

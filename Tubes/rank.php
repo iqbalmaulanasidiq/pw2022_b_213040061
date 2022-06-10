@@ -2,6 +2,11 @@
 
 require "header.php";
 require "connection.php";
+session_start();
+if(!isset($_SESSION['login'])){
+    header("location: login.php");
+    exit;
+}
 ?>
 <header class="header">
   <div class="header-inner">
@@ -93,7 +98,7 @@ require "connection.php";
 
                                         $row = mysqli_num_rows($query);
                                         if($row == 0){
-                                            echo "<tr><td colspan='3'><center>Anda Belum Mengerjakan Ujian</center></td></tr>";
+                                            echo "<tr><td colspan='4'><center>Anda Belum Mengerjakan Ujian</center></td></tr>";
                                           }else{
                                              
                                             while($data = mysqli_fetch_array($query)){

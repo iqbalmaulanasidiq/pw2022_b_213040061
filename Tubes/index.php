@@ -2,7 +2,12 @@
 
 
 require 'header.php';
-require 'connection.php'
+require 'connection.php';
+session_start();
+if(!isset($_SESSION['login'])){
+    header("location: login.php");
+    exit;
+}
 ?>
 <header class="header">
   <div class="header-inner">
@@ -30,6 +35,8 @@ require 'connection.php'
       
     </ul>
     <?php 
+    
+
     $id_peserta = $_SESSION['login']['id'];
     $sql = "SELECT * FROM peserta WHERE id = '$id_peserta'";
     $query = mysqli_query($conn, $sql);

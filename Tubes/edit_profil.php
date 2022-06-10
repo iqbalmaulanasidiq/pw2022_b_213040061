@@ -2,6 +2,12 @@
 require 'connection.php';
 require 'header.php';
 
+   session_start();
+   if(!isset($_SESSION['login'])){
+       header("location: login.php");
+       exit;
+   }
+  
 $id = $_SESSION['login']['id'];
 
 $res=mysqli_query($conn, "SELECT * FROM peserta WHERE id=$id");
