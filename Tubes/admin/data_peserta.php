@@ -29,7 +29,12 @@
                                
 
                         <div class="card-body">
+
+                          <div class="d-flex justify-content-between">
                                 <a href="tambah_peserta.php" class="btn btn-primary rounded m-2"><i class="fa fa-plus p-2"></i>Tambah Data Peserta</a>
+                                <a href="download_peserta.php" target="_blank" class="btn btn-primary rounded m-2"><i class="fa fa-download p-2"></i></a>
+                          </div>
+
                             <div id="tampilkan">
                                 <table class="table table-bordered">
                                     <thead>

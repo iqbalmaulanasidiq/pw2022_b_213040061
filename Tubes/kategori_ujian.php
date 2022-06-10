@@ -23,7 +23,7 @@ require "connection.php";
         <a class="nav-link" href="kategori_ujian.php">Kategori</a>
       </li>
         <li class="nav-item">
-        <a class="nav-link" href="rank.php">Ranking</a>
+        <a class="nav-link" href="rank.php">Nilai</a>
       </li>
       
       

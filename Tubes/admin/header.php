@@ -61,8 +61,9 @@ if(!isset($_SESSION['login'])){
                     <li>
                         <a href="index.php"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                         <a href="data_peserta.php"> <i class="menu-icon fa fa-users"></i></i>Data Peserta </a>
-                        <!-- <a href="kategori.php"> <i class="menu-icon fa fa-book"></i>Kategori</a> -->
+                        
                         <a href="soal.php"> <i class="menu-icon fa fa-question"></i>Soal Soal</a>
+                        <a href="jawaban.php"> <i class="menu-icon fa fa-book"></i>Jawaban</a>
                     </li>
                     <li>
                         <a href="logout.php" onclick="return confirm('Apakah Kamu Yakin Akan Keluar?'); "> <i class="menu-icon fa fa-close"></i>logout </a>

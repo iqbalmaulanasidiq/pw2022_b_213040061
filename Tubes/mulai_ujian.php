@@ -22,7 +22,7 @@ require "connection.php";
         <a class="nav-link" href="kategori_ujian.php" onclick="return confirm('Yakin Meninggalkan Halaman ini?'); ">Kategori</a>
       </li>
         <li class="nav-item">
-        <a class="nav-link" href="rank.php" onclick="return confirm('Yakin Meninggalkan Halaman ini?'); ">Ranking</a>
+        <a class="nav-link" href="rank.php" onclick="return confirm('Yakin Meninggalkan Halaman ini?'); ">Nilai</a>
       </li>
       
       
@@ -83,7 +83,7 @@ $jumlah_soal = mysqli_num_rows($query);
               
               <a href="" class="text-warning h5" onclick="return confirm('Kerjakan Soal Essay Berikut dengan sertakan nama lengkap, kategori soal, nomor soal, dan halaman soal. Kemudian Upload Dengan Format .PDF atau .docx'); ""><i class="bi bi-info-circle-fill"></i></a>
               <h3 class="text-center">Soal Essay</h3>
-              <a href="download_soal.php">DOWNLOAD SOAL</a>
+              <a href="download_soal.php?id=<?= $id_kat ?>" target="_blank">DOWNLOAD SOAL</a>
             </div>
             <div class="card-body">
             
