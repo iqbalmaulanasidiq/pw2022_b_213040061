@@ -6,5 +6,5 @@
 
 <script type="text/javascript">
     alert("Kategori Ujian Telah Di Hapus");
-    window.location="kategori.php";
+    document.location="soal.php";
 </script>

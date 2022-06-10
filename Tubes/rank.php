@@ -80,6 +80,7 @@ require "connection.php";
                                         <th style="width: 10px;">No</th>
                                         <th >Kategori</th>
                                         <th>Nilai</th>
+                                        <th style="width: 150px;">Download Nilai</th>
                                         
                                     </tr>
                                 </thead>
@@ -88,18 +89,34 @@ require "connection.php";
                                         $id_peserta = $_SESSION['login']['id']; 
                                         $query= mysqli_query($conn, "SELECT * FROM jawaban INNER JOIN peserta ON jawaban.id = peserta.id INNER JOIN kategori ON jawaban.id_kategori = kategori.id_kategori WHERE jawaban.id = '$id_peserta'");
                                         $no = 1;
-                                        while($data = mysqli_fetch_array($query)){
-                                            ?>
-                                            <tr>
-                                                <td><?= $no++; ?></td>
-                                                <td><?= $data['kategori_ujian']; ?></td>
-                                                <td><?= $data['nilai']; ?></td>
-                                            </tr>
-                                            <?php
-                                        }
+                                       
+
+                                        $row = mysqli_num_rows($query);
+                                        if($row == 0){
+                                            echo "<tr><td colspan='3'><center>Anda Belum Mengerjakan Ujian</center></td></tr>";
+                                          }else{
+                                             
+                                            while($data = mysqli_fetch_array($query)){
+                                                $nilai = $data['nilai'];
+                                                $kategori = $data['kategori_ujian'];
+                                                $id_jawaban = $data['id_jawaban'];
+                                                echo "<tr>";
+                                                echo "<td>$no</td>";
+                                                echo "<td>$kategori</td>";
+                                                echo "<td>$nilai</td>";
+                                                echo "<td><a href='nilai_serti.php?id_jawaban=$id_jawaban'><i class='bi bi-download btn btn-primary'></i></a></td>";
+                                                echo "</tr>";
+                                                $no++;
+                                               
+
+                                              }
+                                          }
                                     ?>
                                 </tbody>
                             </table>
+                            
+                            
+                           
                         </div>
                     </div>
                 

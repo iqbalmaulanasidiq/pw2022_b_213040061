@@ -72,9 +72,7 @@ require "../connection.php";
                 </div>
             </div>
 
-           <div class="container">
-               <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquam enim dolor aliquid maxime est possimus dicta, corrupti tempore reprehenderit laudantium ipsum, perferendis quisquam iure iusto. Voluptatem iure, sint facere aspernatur itaque earum delectus dicta? Animi rerum eius molestiae non, autem aspernatur quo neque, provident vitae ipsa ducimus tenetur. Nobis, dolores!</p>
-           </div>
+           
  
 
             </div>

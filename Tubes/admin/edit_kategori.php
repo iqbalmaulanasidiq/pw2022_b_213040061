@@ -103,7 +103,7 @@
         echo "
         <script>
         alert('Kategori Ujian Berhasil Diubah');
-        window.location='kategori.php';
+        document.location='soal.php';
         </script>";
     }
 ?>
