@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 10, 2022 at 02:47 PM
+-- Generation Time: Jun 10, 2022 at 04:07 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -79,7 +79,11 @@ CREATE TABLE `kategori` (
 --
 
 INSERT INTO `kategori` (`id_kategori`, `kategori_ujian`) VALUES
-(39, 'Computer (IT)');
+(39, 'Computer (IT)'),
+(40, 'Matematika'),
+(41, 'IPA'),
+(42, 'Sejarah'),
+(43, 'filsafat');
 
 -- --------------------------------------------------------
 
@@ -102,7 +106,10 @@ CREATE TABLE `peserta` (
 
 INSERT INTO `peserta` (`id`, `nama_peserta`, `username`, `email`, `pass`, `gambar`) VALUES
 (51, 'Iqbal Maulana Sidiq', 'iqbal', 'iqbalsidiq523@gmail.com', 'iqbal', '62a32c00d4a16wayang-bima-free-vector.jpg'),
-(53, 'Ardhia Nugraha', 'ardhi', 'ardhi@gmail.com', '123', '62a32d8e8276bmelanie-these-rz3eCYGgGSc-unsplash.jpg');
+(53, 'Ardhia Nugraha', 'ardhi', 'ardhi@gmail.com', '123', '62a32d8e8276bmelanie-these-rz3eCYGgGSc-unsplash.jpg'),
+(54, 'ruhayat', 'ayat', 'ayat@gmail', 'ayatdong', 'nophoto.png'),
+(55, 'mamat', 'amat', 'amat@amat', 'amatinaja', 'nophoto.png'),
+(56, 'suhayat', 'hayat', 'hayat@gmail.com', 'hatai', 'nophoto.png');
 
 -- --------------------------------------------------------
 
@@ -128,7 +135,27 @@ INSERT INTO `soalsoal` (`id_soal`, `pertanyaan`, `id_kategori`) VALUES
 (75, 'siapa penemu komputer?\r\n', 39),
 (76, 'sebutkan apa saja yang termasuk hardware?', 39),
 (77, 'sebutkan apa saja yang termasuk software?', 39),
-(78, 'apa kepanjangan dari CPU, dan jelaskan apa fungsinya?\r\n', 39);
+(78, 'apa kepanjangan dari CPU, dan jelaskan apa fungsinya?\r\n', 39),
+(79, 'Tuliskan rumus phythagoras!', 40),
+(80, 'tuliskan rumus menghitung luas lingkaran!', 40),
+(81, '2 x 2 + 4 - 2 x 12 x 0 =', 40),
+(82, 'tuliskan rumus peluang', 40),
+(83, 'suatu kolam berbentuk  persegi dengan sisi 100km, hitung keliling dan luasnya!', 40),
+(84, 'Hewan yang mengalami metamorfosis sempurna adalah\r\n\r\n', 41),
+(85, 'Indikator: Peserta didik mampu mengklasifikasikan keragaman pada sistem organisasi kehidupan dari sel, jaringan, organ, sistem organ dan organisme\r\nSusunan yang tepat pada sistem organisasi kehidupan dari yang sederhana menuju kompleks adalah', 41),
+(86, 'Indikator: Peserta didik mampu mengidentifikasi ciri-ciri makhluk abiotik dan biotik yang ada di lingkungan sekitar\r\nBerikut ini merupakan komponen biotik di alam adalah', 41),
+(87, 'Indikator: Peserta didik mampu menganalisis prosedur pengelolaan lingkungan untuk mengatasi pencemaran dan kerusakan lingkungan\r\nUpaya meminimalisasi sampah hasil limbah rumah tangga agar tidak mencemari perairan dapat dilakukan dengan cara mendaur ulang sampah-sampah di sekitar kita. Seperti dibuat menjadi kompos, kerajinan tangan, dan benda berguna lainnya. Upaya tersebut disebut dengan istilah….', 41),
+(88, 'Tubuh manusia dibentuk oleh tulang-tulang yang tersusun secara teratur yang disebut rangka. Terdapat 4 fungsi utama sistem rangka bagi tubuh, yaitu :', 41),
+(89, 'Pemerintah kolonial Belanda, mengumumkan pembuatan parlemen di Hindia Belanda melalui \r\n', 42),
+(90, 'Salah satu tuntutan dalam Gerakan Reformasi 1998 adalah mendesak pemerintah agar melakukan penguatan terhadap konstitusi negara. Hal ini kemudian diwujudkan dengan', 42),
+(91, '“Jepang melarang pemakaian bahasa Belanda dan bahasa Inggris serta memajukan bahasa Jepang dan pelarangan penggunaan buku-buku dari Barat”. Makna yang terkandung atas kebijakan Jepang tersebut adalah', 42),
+(92, 'Salah satu konflik paling menakutkan pada masa Perang Dingin adalah ketika Amerika Serikat berkonflik dengan negara Kuba yang baru saja berhasil melakukan revolusi dan membuat kekuataan sosialis menjadi penguasa di negara tersebut lewat bantuan Uni Soviet. Hal tersebut mendorong Amerika Serikat melakukan aksi militer dengan menginvasi Teluk Babi agar', 42),
+(93, 'Jelaskan arti pengetahuan mistik berdasarkan bahasa dan istilah!', 43),
+(94, 'Jelaskan aliran-aliran (monoisme, dualisme, pluralisme, nihilisme, agnotisme) yang dapat ditimbulkan dari pengetahuan mistik!', 43),
+(95, 'Jelaskan objek dalam pengetahuan mistik!', 43),
+(96, 'Bagaimana cara pengetahuan mistik diperoleh!', 43),
+(97, 'Jelaskan ukuran kebenaran dalam pengetahuan mistik!', 43),
+(98, 'Jelaskan kegunaan pengetahuan mistik!', 43);
 
 --
 -- Indexes for dumped tables
@@ -187,19 +214,19 @@ ALTER TABLE `jawaban`
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `peserta`
 --
 ALTER TABLE `peserta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `soalsoal`
 --
 ALTER TABLE `soalsoal`
-  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
 
 --
 -- Constraints for dumped tables
